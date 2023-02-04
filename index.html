@@ -2,7 +2,7 @@
 <html lang="en">
 <head>
   <meta charset="utf-8">
-  <title>GameDevMadeEasy - Gen1 Splits and GameTime Counter v0.1</title>
+  <title>GameDevMadeEasy - Gamehook Smart Mapper UI</title>
 </head>
   <body style="overflow-x:hidden; overflow-Y:hidden;" scrolling="no" seamless="seamless">
     <div id="app">
@@ -10,32 +10,46 @@
         Loading...
       </div>
       <div v-else>
+        {{BattleState()}}
         <!-- Displays Always -->
+        <div class="Splits">
+          <iframe class="SplitsFrame" src="GymSplits.html" width="1920" height="1080" frameBorder="0" style="position: absolute; left: 20px"></iframe>
+        </div>
         <img alt="bg" src="images/background/Background.png" width="1900" height="1060">
-        <span p style="position: absolute;left: 800px; font-size: 45px">Game Time: {{gameTimeHMS()}} {{gameTimer}}</span>
         <div class="box" style="position: absolute; background: white; top: 430px; left: 10px; width:410px; height: 200px"></div>
         <img p class="sprite" style="position: absolute;top: 700px;left: 100px;" width="200" height="200"
              :src="PokemonSprites()" />
         <div class="Badges">
           <iframe class="Badge" style="position: absolute;top: 890px;" width="500" height="200" src="GymBadges.html" frameBorder="0"></iframe>
         </div>
+        <!-- End Displays Always -->
+
+        <!-- Conditionally Displays -->
         <div class="teamView">
           <iframe class="frame" style="position: absolute;left: 1625px; top:150px" src="GenOneTeamView.html" width="260" height="650" frameBorder="0"></iframe>
         </div>
+        <!-- End Conditionally Displays -->
 
         <!-- Battle and Over World States -->
-        <div class="battleState" v-if="BattleState() === 4" style="transform: scale(1.5, 1.5); position: absolute; top: 455px;left: 40px; width:270px;">
+        <div class="battleState" v-if="BattleState() === 0" style="transform: scale(1.5, 1.5); position: absolute; top: 455px;left: 40px; width:270px;">
+          <iframe class="battleStateFrame" :src="SwapBattleToOverWorldState()" frameBorder="0"></iframe>
+        </div>
+        <div class="battleState" v-if="BattleState() === 1" style="transform: scale(1.5, 1.5); position: absolute; top: 450px;left: 54px; width:270px;">
+          <iframe class="battleStateFrame" :src="SwapBattleToOverWorldState()" frameBorder="0"></iframe>
+        </div>
+        <div class="battleState" v-if="BattleState() === 2" style="transform: scale(1.5, 1.5); position: absolute; top: 455px;left: 40px; width:270px;">
+          <iframe class="battleStateFrame" :src="SwapBattleToOverWorldState()" frameBorder="0"></iframe>
+        </div>
+        <div class="battleState" v-if="BattleState() === 3" style="transform: scale(1.5, 1.5); position: absolute; top: 450px;left: 54px; width:270px;">
+          <iframe class="battleStateFrame" :src="SwapBattleToOverWorldState()" frameBorder="0"></iframe>
+        </div>
+        <div class="battleState" v-if="BattleState() === 4" style="transform: scale(1.5, 1.5); position: absolute; top: 450px;left: 54px; width:270px;">
           <iframe class="battleStateFrame" :src="SwapBattleToOverWorldState()" frameBorder="0"></iframe>
         </div>
         <div class="battleState" v-if="BattleState() === 5" style="transform: scale(1.5, 1.5); position: absolute; top: 450px;left: 54px; width:270px;">
           <iframe class="battleStateFrame" :src="SwapBattleToOverWorldState()" frameBorder="0"></iframe>
         </div>
-
-        <!-- Splits -->
-        <div class="Splits">
-          <iframe class="SplitsFrame" style="position: absolute;left: -35px; top:-220px" src="GymSplits.html" width="500" height="1000" frameBorder="0"></iframe>
-        </div>
-
+        <!-- End Battle and Over World States -->
       </div>
     </div>
 

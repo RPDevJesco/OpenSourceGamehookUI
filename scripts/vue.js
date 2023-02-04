@@ -12,7 +12,7 @@ const app = Vue.createApp({
         /**
          * Determines which version of Pokemon is being run. Which will allow for
          * making a more seamless frontend that changes depending upon the game.
-         * Gen 1 is 1, gen 2 is 2 and gen 3 is 3. If it ever returns 0, that means an error has occurred.
+         * Gen 1 is 1, gen 2 is 2, fire red / leaf green is 3 and gen 3 is 4. If it ever returns 0, that means an error has occurred.
          **/
         GameVersionState(){
             if (this.mapper.meta.gameName === 'Pokemon Red and Blue') {
@@ -31,10 +31,10 @@ const app = Vue.createApp({
                 return 3;
             }
             else if (this.mapper.meta.gameName === 'Pokemon Ruby & Sapphire') {
-                return 3;
+                return 4;
             }
             else if (this.mapper.meta.gameName === 'Pokemon Emerald') {
-                return 3;
+                return 4;
             }
             else {
                 return 0;
@@ -49,11 +49,18 @@ const app = Vue.createApp({
         BattleState(){
             if (this.GameVersionState() === 1) {
                 // 0 = over world state, 1 = battle state
-                if (this.mapper.properties.player.team[0].level > 0 && this.mapper.properties.battle.outcome.value === 'WON') {
-                    return 0
+                if (this.mapper.properties.battle.type.value === `None`) {
+                    return 0;
                 }
-                else
-                    return 1
+                else if (this.mapper.properties.battle.type.value === `Wild`) {
+                    return 1;
+                }
+                else if (this.mapper.properties.battle.type.value === `Trainer`) {
+                    return 1;
+                }
+                else {
+                    return 0;
+                }
             }
             if (this.GameVersionState() === 2) {
                 // 2 = over world state, 3 = battle state
@@ -95,11 +102,23 @@ const app = Vue.createApp({
          * Swaps between the over world and Battle states src values.
          */
         SwapBattleToOverWorldState() {
+          if (this.BattleState() === 0) {
+            return 'GenOneOverWorldStats.html';
+          }
+          if (this.BattleState() === 1) {
+            return 'GenOneBattleStats.html';
+          }
+          if (this.BattleState() === 2) {
+            return null;
+          }
+          if (this.BattleState() === 3) {
+              return null;
+          }
           if (this.BattleState() === 4) {
-              return 'GenThreeOverWorldStats.html';
+            return 'GenThreeOverWorldStats.html';
           }
           if (this.BattleState() === 5) {
-              return 'GenThreeBattleStats.html';
+            return 'GenThreeBattleStats.html';
           }
         },
         PokemonSprites() {
@@ -115,23 +134,6 @@ const app = Vue.createApp({
                 if (pokeDexEntry > 11 && pokeDexEntry < 100) pokeDexEntry = '0' + pokeDexEntry;
                 return "https://www.serebii.net/pokearth/sprites/frlg/" + pokeDexEntry + ".png";
             }
-        },
-        // This function will properly format the time to be in an easily readable format as it would display on a clock.
-        gameTimeFormatString(h, m, s) {
-            if (h <= 0) {
-                if (m <= 0) return `${s}`;
-                if (s < 10) s = "0" + s.toString();
-                return `${m}:${s}`;
-            }
-            if (s < 10) s = "0" + s.toString();
-            if (m < 10) m = "0" + m.toString();
-            return `${h}:${m}:${s}`;
-        },
-        gameTimeHMS: function() {
-            this.gameTimer = this.gameTimeFormatString(
-                this.mapper.properties.gameTime.hours,
-                this.mapper.properties.gameTime.minutes,
-                this.mapper.properties.gameTime.seconds);
         },
     },
 

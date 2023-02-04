@@ -2,23 +2,26 @@
 <html lang="en">
 <head>
   <meta charset="utf-8">
-  <title>GameDevMadeEasy - Gym Splits</title>
+  <title>GameDevMadeEasy - Gym Splits and GameTimer</title>
 </head>
-<body>
+<body style="overflow-x:hidden; overflow-Y:hidden;" scrolling="no" seamless="seamless">
 <div id="app">
   <div v-if="ready == false">
     Loading...
   </div>
   <div v-else>
-    <div style="font-size:20px; position: absolute;top: 400px;left: 50px;">Brock Split: {{gym1Split}}</div>
-    <div style="font-size:20px; position: absolute;top: 440px;left: 50px;">Misty Split: {{gym2Split}}</div>
-    <div style="font-size:20px; position: absolute;top: 480px;left: 50px;">Surge Split: {{gym3Split}}</div>
-    <div style="font-size:20px; position: absolute;top: 520px;left: 50px;">Erika Split: {{gym4Split}}</div>
-    <div style="font-size:20px; position: absolute;top: 400px;left: 250px;">Koga Split: {{gym5Split}}</div>
-    <div style="font-size:20px; position: absolute;top: 440px;left: 250px;">Sabrina Split: {{gym6Split}}</div>
-    <div style="font-size:20px; position: absolute;top: 480px;left: 250px;">Blaine Split: {{gym7Split}}</div>
-    <div style="font-size:20px; position: absolute;top: 520px;left: 250px;">Giovanni Split: {{gym8Split}}</div>
-    <div style="font-size:20px; position: absolute;top: 560px;left: 50px;">Champion Split: {{championDefeated}}</div>
+    <div v-if="GameVersionState() === 3">
+      <span p style="position: absolute;left: 800px; top:10px; font-size: 45px;">Game Time: {{gameTimeHMS()}} {{gameTimer}}</span>
+      <div style="font-size:20px; position: absolute;top: 200px;left: 50px;">Brock Split: {{gym1Split}}</div>
+      <div style="font-size:20px; position: absolute;top: 240px;left: 50px;">Misty Split: {{gym2Split}}</div>
+      <div style="font-size:20px; position: absolute;top: 280px;left: 50px;">Surge Split: {{gym3Split}}</div>
+      <div style="font-size:20px; position: absolute;top: 320px;left: 50px;">Erika Split: {{gym4Split}}</div>
+      <div style="font-size:20px; position: absolute;top: 200px;left: 250px;">Koga Split: {{gym5Split}}</div>
+      <div style="font-size:20px; position: absolute;top: 240px;left: 250px;">Sabrina Split: {{gym6Split}}</div>
+      <div style="font-size:20px; position: absolute;top: 280px;left: 250px;">Blaine Split: {{gym7Split}}</div>
+      <div style="font-size:20px; position: absolute;top: 320px;left: 250px;">Giovanni Split: {{gym8Split}}</div>
+      <div style="font-size:20px; position: absolute;top: 360px;left: 50px;">Champion Split: {{championDefeated}}</div>
+    </div>
   </div>
 </div>
 

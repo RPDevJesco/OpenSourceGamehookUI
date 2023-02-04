@@ -3,7 +3,7 @@
 
 <head>
   <meta charset="utf-8">
-  <title>GameHook Gen 3 Tracking Battle Stat Values</title>
+  <title>GameHook Gen 1 Tracking Battle Stat Values</title>
 
 </head>
 
@@ -29,28 +29,26 @@
       return {
         ready: false,
         mapper: null,
+        currentHP: 0,
+        maxHP: 0,
         chart: null,
         chartData: {
-          labels: ['HP', 'Attack', 'Defense', 'SP.ATK', 'SP.Def', 'Speed'],
+          labels: ['HP', 'Attack', 'Defense', 'Speed', 'Special'],
           datasets: [
             {
               label: 'Active Pokemon Stats',
-              data: [0,0,0,0,0,0],
+              data: [0,0,0,0,0],
               backgroundColor: [
-                'rgba(255, 0, 0, 0.8)',
-                'rgba(5, 5, 251, 0.8)',
-                'rgba(248, 248, 5, 1)',
-                'rgba(5, 248, 238, 1)',
-                'rgba(163, 5, 166, 1)',
-                'rgba(60, 62, 62, 0.61)',
+                'rgba(255, 99, 132, 0.2)',
+                'rgba(54, 162, 235, 0.2)',
+                'rgba(255, 206, 86, 0.2)',
+                'rgba(75, 192, 192, 0.2)'
               ],
               borderColor: [
-                'rgba(255, 0, 0, 0.8)',
-                'rgba(5, 5, 251, 0.8)',
-                'rgba(248, 248, 5, 1)',
-                'rgba(5, 248, 238, 1)',
-                'rgba(163, 5, 166, 1)',
-                'rgba(60, 62, 62, 0.61)',
+                'rgba(255, 99, 132, 1)',
+                'rgba(54, 162, 235, 1)',
+                'rgba(255, 206, 86, 1)',
+                'rgba(75, 192, 192, 1)'
               ],
               borderWidth: 0
             }
@@ -61,13 +59,11 @@
     methods: {
       updateData() {
         this.chartData.datasets[0].data = [
-            this.mapper.properties.battle.yourPokemon.hp,
-            this.mapper.properties.battle.yourPokemon.attack,
-            this.mapper.properties.battle.yourPokemon.defense,
-            this.mapper.properties.battle.yourPokemon.specialAttack,
-            this.mapper.properties.battle.yourPokemon.specialDefense,
-            this.mapper.properties.battle.yourPokemon.speed
-        ];
+          this.mapper.properties.player.team[0].hp,
+          this.mapper.properties.player.team[0].attack,
+          this.mapper.properties.player.team[0].defense,
+          this.mapper.properties.player.team[0].speed,
+          this.mapper.properties.player.team[0].special];
         if (this.chart === null) return;
         this.chart.update();
       }
@@ -82,14 +78,9 @@
       await this.mapper.connect();
 
       this.chart = new Chart(this.$refs.barChart, {
-        type: 'horizontalBar',
+        type: 'radar',
         data: this.chartData,
         options: {
-          plugins: {
-            customCanvasBackgroundColor: {
-              color: 'white',
-            }
-          },
           legend: {
             display: false
           },

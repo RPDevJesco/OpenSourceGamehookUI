@@ -4,6 +4,7 @@ const app = Vue.createApp({
         return {
             ready: false,
             mapper: null,
+            gameTimer: '--',
             gym1Split: '--',
             gym2Split: '--',
             gym3Split: '--',
@@ -18,6 +19,7 @@ const app = Vue.createApp({
 
     //FUNCTIONS -----------------------------------------------------------------------------------------------//
     methods: {
+        // This function will properly format the time to be in an easily readable format as it would display on a clock.
         gameTimeFormatString(h, m, s) {
             if (h <= 0) {
                 if (m <= 0) return `${s}`;
@@ -27,6 +29,43 @@ const app = Vue.createApp({
             if (s < 10) s = "0" + s.toString();
             if (m < 10) m = "0" + m.toString();
             return `${h}:${m}:${s}`;
+        },
+        gameTimeHMS: function() {
+            this.gameTimer = this.gameTimeFormatString(
+                this.mapper.properties.gameTime.hours,
+                this.mapper.properties.gameTime.minutes,
+                this.mapper.properties.gameTime.seconds);
+        },
+        /**
+         * Determines which version of Pokemon is being run. Which will allow for
+         * making a more seamless frontend that changes depending upon the game.
+         * Gen 1 is 1, gen 2 is 2, fire red / leaf green is 3 and gen 3 is 4. If it ever returns 0, that means an error has occurred.
+         **/
+        GameVersionState(){
+            if (this.mapper.meta.gameName === 'Pokemon Red and Blue') {
+                return 1;
+            }
+            else if (this.mapper.meta.gameName === 'Pokemon Yellow') {
+                return 1;
+            }
+            else if (this.mapper.meta.gameName === 'Pokemon Gold and Silver') {
+                return 2;
+            }
+            else if (this.mapper.meta.gameName === 'Pokemon Crystal') {
+                return 2;
+            }
+            else if (this.mapper.meta.gameName === 'Pokemon FireRed & LeafGreen') {
+                return 3;
+            }
+            else if (this.mapper.meta.gameName === 'Pokemon Ruby & Sapphire') {
+                return 4;
+            }
+            else if (this.mapper.meta.gameName === 'Pokemon Emerald') {
+                return 4;
+            }
+            else {
+                return 0;
+            }
         }
     },
 

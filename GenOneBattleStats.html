@@ -7,13 +7,13 @@
 
 </head>
 
-<body>
+<body style="overflow-x:hidden; overflow-Y:hidden;" scrolling="no" seamless="seamless">
 <div id="app">
   <div v-if="ready == false">
     Loading...
   </div>
   <div v-else>
-    <canvas ref="barChart"></canvas>
+    <canvas ref="barChart">{{updateData()}}</canvas>
   </div>
 </div>
 
@@ -33,7 +33,7 @@
         maxHP: 0,
         chart: null,
         chartData: {
-          labels: ['HP', 'Attack', 'Defense', 'Special', 'Speed'],
+          labels: ['HP', 'Attack', 'Defense', 'Speed', 'Special'],
           datasets: [
             {
               label: 'Active Pokemon Stats',
@@ -42,15 +42,13 @@
                 'rgba(255, 99, 132, 0.2)',
                 'rgba(54, 162, 235, 0.2)',
                 'rgba(255, 206, 86, 0.2)',
-                'rgba(75, 192, 192, 0.2)',
-                'rgba(153, 102, 255, 0.2)'
+                'rgba(75, 192, 192, 0.2)'
               ],
               borderColor: [
                 'rgba(255, 99, 132, 1)',
                 'rgba(54, 162, 235, 1)',
                 'rgba(255, 206, 86, 1)',
-                'rgba(75, 192, 192, 1)',
-                'rgba(153, 102, 255, 1)'
+                'rgba(75, 192, 192, 1)'
               ],
               borderWidth: 0
             }
@@ -60,11 +58,12 @@
     },
     methods: {
       updateData() {
-        this.chartData.datasets[0].data = [this.mapper.properties.battle.yourPokemon.battleStatHp,
-          this.mapper.properties.battle.yourPokemon.battleStatAttack,
-          this.mapper.properties.battle.yourPokemon.battleStatDefense,
-          this.mapper.properties.battle.yourPokemon.battleStatSpecial,
-          this.mapper.properties.battle.yourPokemon.battleStatSpeed];
+        this.chartData.datasets[0].data = [this.mapper.properties.battle.yourPokemon.hp,
+          this.mapper.properties.battle.yourPokemon.attack,
+          this.mapper.properties.battle.yourPokemon.defense,
+          this.mapper.properties.battle.yourPokemon.speed,
+          this.mapper.properties.battle.yourPokemon.special];
+        if (this.chart === null) return;
         this.chart.update();
       }
     },
@@ -93,7 +92,6 @@
           }
         }
       });
-      this.updateData();
     },
   }).mount('#app')
 </script>
