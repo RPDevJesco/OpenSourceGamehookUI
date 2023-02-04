@@ -16,11 +16,9 @@
         <div class="teamView">
           <iframe class="frame" style="position: absolute;left: 1620px; top:150px" src="GenOneTeamView.html" width="260" height="650" frameBorder="0"></iframe>
         </div>
-        <!-- For some reason, this is displaying the battle state instead of over world state -->
         <div class="battleState" v-if="BattleState() == 4" style="transform: scale(1.5, 1.5); position: absolute;top: 450px;left: 75px; width:300px;padding-top: 0.25%;">
           <iframe class="battleStateFrame" src="GenThreeOverWorldStats.html" frameBorder="0"></iframe>
         </div>
-        <!-- For some reason, this is displaying the over world state instead of battle state -->
         <div class="battleState" v-if="BattleState() == 5" style="transform: scale(1.5, 1.5); position: absolute;top: 450px;left: 75px; width:300px;padding-top: 0.25%;">
           <iframe class="battleStateFrame" src="GenThreeBattleStats.html" frameBorder="0"></iframe>
         </div>

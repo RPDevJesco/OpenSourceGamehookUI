@@ -65,7 +65,7 @@ const app = Vue.createApp({
             }
             if (this.GameVersionState() === 3) {
                 // battle.turnInfo.battleDialogue (3 when the battle starts, 6 when it ends)
-                // battle.turnInfo.battleOutcome (1 is won, 2 is lost) will reset when it goes to a new battle.h
+                // battle.turnInfo.battleOutcome (1 is won, 2 is lost) will reset when it goes to a new battle.
                 // 4 = over world state, 5 = battle state
                 if (this.mapper.properties.battle.turnInfo.battleDialogue.value === 0 && this.mapper.properties.battle.turnInfo.battleOutcome.value === 0) {
                     return 4; // This is how the values look upon reset or new game. Both being at 0, which means we are in the over world state.
