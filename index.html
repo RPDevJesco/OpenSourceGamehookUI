@@ -17,10 +17,10 @@
           <iframe class="frame" style="position: absolute;left: 1620px; top:150px" src="GenOneTeamView.html" width="260" height="650" frameBorder="0"></iframe>
         </div>
         <div class="battleState" v-if="BattleState() == 4" style="transform: scale(1.5, 1.5); position: absolute;top: 450px;left: 75px; width:300px;padding-top: 0.25%;">
-          <iframe class="battleStateFrame" src="GenThreeOverWorldStats.html" frameBorder="0"></iframe>
+          <iframe class="battleStateFrame" :src="SwapBattleToOverWorldState()" frameBorder="0"></iframe>
         </div>
         <div class="battleState" v-if="BattleState() == 5" style="transform: scale(1.5, 1.5); position: absolute;top: 450px;left: 75px; width:300px;padding-top: 0.25%;">
-          <iframe class="battleStateFrame" src="GenThreeBattleStats.html" frameBorder="0"></iframe>
+          <iframe class="battleStateFrame" :src="SwapBattleToOverWorldState()" frameBorder="0"></iframe>
         </div>
         <img alt="bg" src="images/background/Background.png" width="1900" height="1060">
         <span p style="position: absolute;left: 800px; font-size: 45px">Game Time: {{gameTimeHMS()}} {{gameTimer}}</span>
