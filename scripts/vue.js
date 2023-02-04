@@ -122,13 +122,13 @@ const app = Vue.createApp({
           }
         },
         PokemonSprites() {
-            if (this.BattleState() === 4) {
+            if (this.BattleState() === 0 || this.BattleState() === 2 || this.BattleState() === 4) {
                 let pokeDexEntry = this.mapper.properties.player.team[0].pokedexNumber.value;
                 if (pokeDexEntry < 10) pokeDexEntry = '00' + pokeDexEntry;
                 if (pokeDexEntry > 11 && pokeDexEntry < 100) pokeDexEntry = '0' + pokeDexEntry;
                 return "https://www.serebii.net/pokearth/sprites/frlg/" + pokeDexEntry + ".png";
             }
-            if (this.BattleState() === 5) {
+            if (this.BattleState() === 1 || this.BattleState() === 3 || this.BattleState() === 5) {
                 let pokeDexEntry = this.mapper.properties.battle.yourPokemon.pokedexNumber.value;
                 if (pokeDexEntry < 10) pokeDexEntry = '00' + pokeDexEntry;
                 if (pokeDexEntry > 11 && pokeDexEntry < 100) pokeDexEntry = '0' + pokeDexEntry;
