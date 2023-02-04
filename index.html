@@ -10,23 +10,29 @@
         Loading...
       </div>
       <div v-else>
-        <div class="Splits">
-          <iframe class="frame" style="position: absolute;left: 20px; top:-120px" src="GymSplits.html" width="350" height="650" frameBorder="0"></iframe>
-        </div>
+        <!-- Displays Always -->
+        <img alt="bg" src="images/background/Background.png" width="1900" height="1060">
+        <span p style="position: absolute;left: 800px; font-size: 45px">Game Time: {{gameTimeHMS()}} {{gameTimer}}</span>
+        <div class="box" style="position: absolute; background: white; top: 430px; left: 10px; width:410px; height: 200px"></div>
+        <img p class="sprite" style="position: absolute;top: 740px;left: 100px;" width="200" height="200"
+             :src="PokemonSprites()" />
         <div class="teamView">
           <iframe class="frame" style="position: absolute;left: 1620px; top:150px" src="GenOneTeamView.html" width="260" height="650" frameBorder="0"></iframe>
         </div>
-        <div class="battleState" v-if="BattleState() == 4" style="transform: scale(1.5, 1.5); position: absolute;top: 450px;left: 75px; width:300px;padding-top: 0.25%;">
-          <iframe class="battleStateFrame" :src="SwapBattleToOverWorldState()" frameBorder="0"></iframe>
-        </div>
-        <div class="battleState" v-if="BattleState() == 5" style="transform: scale(1.5, 1.5); position: absolute;top: 450px;left: 75px; width:300px;padding-top: 0.25%;">
-          <iframe class="battleStateFrame" :src="SwapBattleToOverWorldState()" frameBorder="0"></iframe>
-        </div>
-        <img alt="bg" src="images/background/Background.png" width="1900" height="1060">
-        <span p style="position: absolute;left: 800px; font-size: 45px">Game Time: {{gameTimeHMS()}} {{gameTimer}}</span>
 
-        <img p class="sprite" style="position: absolute;top: 740px;left: 100px;" width="200" height="200"
-             :src="PokemonSprites()" />
+        <!-- Battle and Over World States -->
+        <div class="battleState" v-if="BattleState() === 4" style="transform: scale(1.5, 1.5); position: absolute; top: 455px;left: 40px; width:270px;">
+          <iframe class="battleStateFrame" :src="SwapBattleToOverWorldState()" frameBorder="0"></iframe>
+        </div>
+        <div class="battleState" v-if="BattleState() === 5" style="transform: scale(1.5, 1.5); position: absolute; top: 450px;left: 54px; width:270px;">
+          <iframe class="battleStateFrame" :src="SwapBattleToOverWorldState()" frameBorder="0"></iframe>
+        </div>
+
+        <!-- Splits -->
+        <div class="Splits">
+          <iframe class="frame" style="position: absolute;left: 20px; top:-120px" src="GymSplits.html" width="350" height="650" frameBorder="0"></iframe>
+        </div>
+
       </div>
     </div>
 
