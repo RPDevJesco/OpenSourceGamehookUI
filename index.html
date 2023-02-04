@@ -1,0 +1,41 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <title>GameDevMadeEasy - Gen1 Splits and GameTime Counter v0.1</title>
+</head>
+  <body style="overflow-x:hidden; overflow-Y:hidden;" scrolling="no" seamless="seamless">
+    <div id="app">
+      <div v-if="ready == false">
+        Loading...
+      </div>
+      <div v-else>
+        <div class="Splits">
+          <iframe class="frame" style="position: absolute;left: 20px; top:-120px" src="GymSplits.html" width="350" height="650" frameBorder="0"></iframe>
+        </div>
+        <div class="teamView">
+          <iframe class="frame" style="position: absolute;left: 1620px; top:150px" src="GenOneTeamView.html" width="260" height="650" frameBorder="0"></iframe>
+        </div>
+        <!-- For some reason, this is displaying the battle state instead of over world state -->
+        <div class="battleState" v-if="BattleState() == 4" style="transform: scale(1.5, 1.5); position: absolute;top: 450px;left: 75px; width:300px;padding-top: 0.25%;">
+          <iframe class="battleStateFrame" src="GenThreeOverWorldStats.html" frameBorder="0"></iframe>
+        </div>
+        <!-- For some reason, this is displaying the over world state instead of battle state -->
+        <div class="battleState" v-if="BattleState() == 5" style="transform: scale(1.5, 1.5); position: absolute;top: 450px;left: 75px; width:300px;padding-top: 0.25%;">
+          <iframe class="battleStateFrame" src="GenThreeBattleStats.html" frameBorder="0"></iframe>
+        </div>
+        <img alt="bg" src="images/background/BaseBackground.png" width="1900" height="1060">
+        <span p style="position: absolute;left: 800px; font-size: 45px">Game Time: {{gameTimeHMS()}} {{gameTimer}}<br> CurrentState: {{BattleState()}} <br> GameVersionState: {{GameVersionState()}}</span>
+
+        <img p class="sprite" style="position: absolute;top: 740px;left: 100px;" width="200" height="200"
+             :src="PokemonSprites()" />
+      </div>
+    </div>
+
+    <script src="https://unpkg.com/vue@3"></script>
+    <script src="https://unpkg.com/@microsoft/signalr@latest/dist/browser/signalr.min.js"></script>
+    <script src="http://localhost:8085/dist/gameHookMapperClient.js"></script>
+    <!-- VUE APP IMPORT -->
+    <script type="text/javascript" src="scripts/vue.js"></script>
+  </body>
+</html>

@@ -1,0 +1,8 @@
+.corner {
+    border-radius: 25px;
+    border: 2px solid #cf5c20;
+    background: white;
+    padding: 20px;
+    width: 204px;
+    height: 60px;
+}

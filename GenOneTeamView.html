@@ -1,0 +1,113 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <title>GameDevMadeEasy - Gen1 Team Viewer</title>
+  <link rel="stylesheet" href="CSS/GenOneTeamViewCSS.css">
+</head>
+<body>
+<div id="app">
+  <div v-if="ready == false">
+    Loading...
+  </div>
+  <div v-else>
+    <div class="media"v-if="mapper.properties.player.team[0].pokedexNumber.value !== null">
+      <div class="corner">
+        <div class="image"><img :src="PokemonSprite(0)" alt="Slot1Pokemon" style="position: absolute;top: 20px;left: 20px;"></div>
+          <div class="mediaChild" style="position: absolute;top: 80px;left: 30px;">
+              Level: {{PokemonLevel(0)}}
+          </div>
+          <div class="content" style="position: absolute;top: 20px;left: 105px;">
+            {{PokemonMove(0,1)}}&nbsp;&nbsp;{{PokemonPP(0,1)}}</br>
+            {{PokemonMove(0,2)}}&nbsp;&nbsp;{{PokemonPP(0,2)}}</br>
+            {{PokemonMove(0,3)}}&nbsp;&nbsp;{{PokemonPP(0,3)}}</br>
+            {{PokemonMove(0,4)}}&nbsp;&nbsp;{{PokemonPP(0,4)}}
+          </div>
+        </div>
+      </div>
+
+    <div class="media"v-if="this.mapper.properties.player.team[1].pokedexNumber.value !== null">
+      <div class="corner">
+        <div class="image"><img :src="PokemonSprite(1)" alt="Slot1Pokemon" style="position: absolute;top: 130px;left: 20px;"></div>
+        <div class="mediaChild" style="position: absolute;top: 180px;left: 30px;">
+          Level: {{PokemonLevel(1)}}
+        </div>
+        <div class="content" style="position: absolute;top: 130px;left: 105px;">
+          {{PokemonMove(1,1)}}&nbsp;&nbsp;{{PokemonPP(1,1)}}</br>
+          {{PokemonMove(1,2)}}&nbsp;&nbsp;{{PokemonPP(1,2)}}</br>
+          {{PokemonMove(1,3)}}&nbsp;&nbsp;{{PokemonPP(1,3)}}</br>
+          {{PokemonMove(1,4)}}&nbsp;&nbsp;{{PokemonPP(1,4)}}
+        </div>
+      </div>
+    </div>
+
+    <div class="media"v-if="this.mapper.properties.player.team[2].pokedexNumber.value !== null">
+      <div class="corner">
+        <div class="image"><img :src="PokemonSprite(2)" alt="Slot1Pokemon" style="position: absolute;top: 230px;left: 20px;"></div>
+        <div class="mediaChild" style="position: absolute;top: 285px;left: 30px;">
+          Level: {{PokemonLevel(2)}}
+        </div>
+        <div class="content" style="position: absolute;top: 230px;left: 105px;">
+          {{PokemonMove(2,1)}}&nbsp;&nbsp;{{PokemonPP(2,1)}}</br>
+          {{PokemonMove(2,2)}}&nbsp;&nbsp;{{PokemonPP(2,2)}}</br>
+          {{PokemonMove(2,3)}}&nbsp;&nbsp;{{PokemonPP(2,3)}}</br>
+          {{PokemonMove(2,4)}}&nbsp;&nbsp;{{PokemonPP(2,4)}}
+        </div>
+      </div>
+    </div>
+
+    <div class="media"v-if="this.mapper.properties.player.team[3].pokedexNumber.value !== null">
+      <div class="corner">
+        <div class="image"><img :src="PokemonSprite(3)" alt="Slot1Pokemon" style="position: absolute;top: 330px;left: 20px;"></div>
+        <div class="mediaChild" style="position: absolute;top: 385px;left: 30px;">
+          Level: {{PokemonLevel(3)}}
+        </div>
+        <div class="content" style="position: absolute;top: 335px;left: 105px;">
+          {{PokemonMove(3,1)}}&nbsp;&nbsp;{{PokemonPP(3,1)}}</br>
+          {{PokemonMove(3,2)}}&nbsp;&nbsp;{{PokemonPP(3,2)}}</br>
+          {{PokemonMove(3,3)}}&nbsp;&nbsp;{{PokemonPP(3,3)}}</br>
+          {{PokemonMove(3,4)}}&nbsp;&nbsp;{{PokemonPP(3,4)}}
+        </div>
+      </div>
+    </div>
+
+    <div class="media"v-if="this.mapper.properties.player.team[4].pokedexNumber.value !== null">
+      <div class="corner">
+        <div class="image"><img :src="PokemonSprite(4)" alt="Slot1Pokemon" style="position: absolute;top: 430px;left: 20px;"></div>
+        <div class="mediaChild" style="position: absolute;top: 485px;left: 30px;">
+          Level: {{PokemonLevel(4)}}
+        </div>
+        <div class="content" style="position: absolute;top: 435px;left: 105px;">
+          {{PokemonMove(4,1)}}&nbsp;&nbsp;{{PokemonPP(4,1)}}</br>
+          {{PokemonMove(4,2)}}&nbsp;&nbsp;{{PokemonPP(4,2)}}</br>
+          {{PokemonMove(4,3)}}&nbsp;&nbsp;{{PokemonPP(4,3)}}</br>
+          {{PokemonMove(4,4)}}&nbsp;&nbsp;{{PokemonPP(4,4)}}
+        </div>
+      </div>
+    </div>
+
+    <div class="media"v-if="this.mapper.properties.player.team[5].pokedexNumber.value !== null">
+      <div class="corner">
+        <div class="image"><img :src="PokemonSprite(5)" alt="Slot1Pokemon" style="position: absolute;top: 530px;left: 20px;"></div>
+        <div class="mediaChild" style="position: absolute;top: 585px;left: 30px;">
+          Level: {{PokemonLevel(5)}}
+        </div>
+        <div class="content" style="position: absolute;top: 540px;left: 105px;">
+          {{PokemonMove(5,1)}}&nbsp;&nbsp;{{PokemonPP(5,1)}}</br>
+          {{PokemonMove(5,2)}}&nbsp;&nbsp;{{PokemonPP(5,2)}}</br>
+          {{PokemonMove(5,3)}}&nbsp;&nbsp;{{PokemonPP(5,3)}}</br>
+          {{PokemonMove(5,4)}}&nbsp;&nbsp;{{PokemonPP(5,4)}}
+        </div>
+      </div>
+    </div>
+
+  </div>
+</div>
+
+<script src="https://unpkg.com/vue@3"></script>
+<script src="https://unpkg.com/@microsoft/signalr@latest/dist/browser/signalr.min.js"></script>
+<script src="http://localhost:8085/dist/gameHookMapperClient.js"></script>
+<!-- VUE APP IMPORT -->
+<script type="text/javascript" src="scripts/GenOneTeamViewJS.js"></script>
+</body>
+</html>

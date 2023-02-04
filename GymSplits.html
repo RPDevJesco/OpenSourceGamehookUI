@@ -1,0 +1,31 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <title>GameDevMadeEasy - Gym Splits</title>
+</head>
+<body>
+<div id="app">
+  <div v-if="ready == false">
+    Loading...
+  </div>
+  <div v-else>
+    <div style="position: absolute;top: 400px;left: 50px;">Brock Split: {{gym1Split}}</div>
+    <div style="position: absolute;top: 420px;left: 50px;">Misty Split: {{gym2Split}}</div>
+    <div style="position: absolute;top: 440px;left: 50px;">Surge Split: {{gym3Split}}</div>
+    <div style="position: absolute;top: 460px;left: 50px;">Erika Split: {{gym4Split}}</div>
+    <div style="position: absolute;top: 400px;left: 200px;">Koga Split: {{gym5Split}}</div>
+    <div style="position: absolute;top: 420px;left: 200px;">Sabrina Split: {{gym6Split}}</div>
+    <div style="position: absolute;top: 440px;left: 200px;">Blaine Split: {{gym7Split}}</div>
+    <div style="position: absolute;top: 460px;left: 200px;">Giovanni Split: {{gym8Split}}</div>
+    <div style="position: absolute;top: 480px;left: 50px;">Champion Split: {{championDefeated}}</div>
+  </div>
+</div>
+
+<script src="https://unpkg.com/vue@3"></script>
+<script src="https://unpkg.com/@microsoft/signalr@latest/dist/browser/signalr.min.js"></script>
+<script src="http://localhost:8085/dist/gameHookMapperClient.js"></script>
+<!-- VUE APP IMPORT -->
+<script type="text/javascript" src="scripts/GymSplits.js"></script>
+</body>
+</html>
