@@ -12,7 +12,7 @@ const app = Vue.createApp({
         /**
          * Determines which version of Pokemon is being run. Which will allow for
          * making a more seamless frontend that changes depending upon the game.
-         * Gen 1 is 1, gen 2 is 2, fire red / leaf green is 3 and gen 3 is 4. If it ever returns 0, that means an error has occurred.
+         * Gen 1 is 1, gen 2 is 2, fire red / leaf green along with gen 3 are 3. If it ever returns 0, that means an error has occurred.
          **/
         GameVersionState(){
             if (this.mapper.meta.gameName === 'Pokemon Red and Blue') {
@@ -21,7 +21,7 @@ const app = Vue.createApp({
             else if (this.mapper.meta.gameName === 'Pokemon Yellow') {
                 return 1;
             }
-            else if (this.mapper.meta.gameName === 'Pokemon Gold and Silver') {
+            else if (this.mapper.meta.gameName === 'Pokemon Gold & Silver') {
                 return 2;
             }
             else if (this.mapper.meta.gameName === 'Pokemon Crystal') {
@@ -64,11 +64,14 @@ const app = Vue.createApp({
             }
             if (this.GameVersionState() === 2) {
                 // 2 = over world state, 3 = battle state
-                if (this.mapper.properties.player.team[0].level > 0 && this.mapper.properties.battle.outcome.value === 'WON') {
-                    return 2
+                if (this.mapper.properties.battle.battleStart.value === 122 && this.mapper.properties.battle.mode.value === 'WILD') {
+                    return 3
+                }
+                if (this.mapper.properties.battle.battleStart.value === 122 && this.mapper.properties.battle.mode.value === 'TRAINER') {
+                    return 3
                 }
                 else
-                    return 3
+                    return 2
             }
             if (this.GameVersionState() === 3) {
                 // battle.turnInfo.battleDialogue (3 when the battle starts, 6 when it ends)
@@ -96,6 +99,21 @@ const app = Vue.createApp({
                     return 4;
                 }
             }
+            if (this.GameVersionState() === 4) {
+                // 4 = over world state, 5 = battle state
+                if (this.mapper.properties.battle.turnInfo.battleOutcome.value === 'WON') {
+                    return 4; // over world state
+                }
+                else if (this.mapper.properties.battle.turnInfo.battleOutcome.value === 'LOST') {
+                    return 4; // over world state
+                }
+                else if (this.mapper.properties.battle.turnInfo.battleOutcome.value === null) {
+                    return 5; // over world state
+                }
+                else {
+                    return 4;
+                }
+            }
 
         },
         /**
@@ -109,16 +127,16 @@ const app = Vue.createApp({
             return 'GenOneBattleStats.html';
           }
           if (this.BattleState() === 2) {
-            return null;
+            return 'GenTwoOverWorldStats.html';
           }
           if (this.BattleState() === 3) {
-              return null;
+              return 'GenTwoBattleStats.html';
           }
           if (this.BattleState() === 4) {
-            return 'GenThreeOverWorldStats.html';
+            return 'GenThreeFireRedLeafGreenOverWorldStats.html';
           }
           if (this.BattleState() === 5) {
-            return 'GenThreeBattleStats.html';
+            return 'GenThreeFireRedLeafGreenBattleStats.html';
           }
         },
         PokemonSprites() {

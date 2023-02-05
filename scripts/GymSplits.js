@@ -48,7 +48,7 @@ const app = Vue.createApp({
             else if (this.mapper.meta.gameName === 'Pokemon Yellow') {
                 return 1;
             }
-            else if (this.mapper.meta.gameName === 'Pokemon Gold and Silver') {
+            else if (this.mapper.meta.gameName === 'Pokemon Gold & Silver') {
                 return 2;
             }
             else if (this.mapper.meta.gameName === 'Pokemon Crystal') {
@@ -124,10 +124,60 @@ const app = Vue.createApp({
             this.gym8Split = this.mapper.properties.gameTime.hours + ':' + this.mapper.properties.gameTime.minutes + ':' + this.mapper.properties.gameTime.seconds;
         });
 
+        if (this.mapper.properties.events.beatChampion === undefined) return;
         this.mapper.properties.events.beatChampion.change(async(x) => {
             console.log('badge8 change: ' + x.value);
             if (x.value === true)
             this.championDefeated = this.mapper.properties.gameTime.hours + ':' + this.mapper.properties.gameTime.minutes + ':' + this.mapper.properties.gameTime.seconds;
+        });
+
+        if (this.mapper.properties.player.badges.badge9 === undefined) return;
+        this.mapper.properties.player.badges.badge9.change(async(x) => {
+            console.log('badge1 change: ' + x.value);
+            if (x.value === true)
+                this.gym1Split = this.mapper.properties.gameTime.hours + ':' + this.mapper.properties.gameTime.minutes + ':' + this.mapper.properties.gameTime.seconds;
+        });
+        if (this.mapper.properties.player.badges.badge10 === undefined) return;
+        this.mapper.properties.player.badges.badge10.change(async(x) => {
+            console.log('badge2 change: ' + x.value);
+            if (x.value === true)
+                this.gym2Split = this.mapper.properties.gameTime.hours + ':' + this.mapper.properties.gameTime.minutes + ':' + this.mapper.properties.gameTime.seconds;
+        });
+        if (this.mapper.properties.player.badges.badge11 === undefined) return;
+        this.mapper.properties.player.badges.badge11.change(async(x) => {
+            console.log('badge3 change: ' + x.value);
+            if (x.value === true)
+                this.gym3Split = this.mapper.properties.gameTime.hours + ':' + this.mapper.properties.gameTime.minutes + ':' + this.mapper.properties.gameTime.seconds;
+        });
+        if (this.mapper.properties.player.badges.badge12 === undefined) return;
+        this.mapper.properties.player.badges.badge12.change(async(x) => {
+            console.log('badge4 change: ' + x.value);
+            if (x.value === true)
+                this.gym4Split = this.mapper.properties.gameTime.hours + ':' + this.mapper.properties.gameTime.minutes + ':' + this.mapper.properties.gameTime.seconds;
+        });
+        if (this.mapper.properties.player.badges.badge13 === undefined) return;
+        this.mapper.properties.player.badges.badge13.change(async(x) => {
+            console.log('badge5 change: ' + x.value);
+            if (x.value === true)
+                this.gym5Split = this.mapper.properties.gameTime.hours + ':' + this.mapper.properties.gameTime.minutes + ':' + this.mapper.properties.gameTime.seconds;
+        });
+        if (this.mapper.properties.player.badges.badge14 === undefined) return;
+        this.mapper.properties.player.badges.badge14.change(async(x) => {
+            console.log('badge6 change: ' + x.value);
+            if (x.value === true)
+                this.gym6Split = this.mapper.properties.gameTime.hours + ':' + this.mapper.properties.gameTime.minutes + ':' + this.mapper.properties.gameTime.seconds;
+        });
+        if (this.mapper.properties.player.badges.badge15 === undefined) return;
+        this.mapper.properties.player.badges.badge15.change(async(x) => {
+            console.log('badge7 change: ' + x.value);
+            if (x.value === true)
+                this.gym7Split = this.mapper.properties.gameTime.hours + ':' + this.mapper.properties.gameTime.minutes + ':' + this.mapper.properties.gameTime.seconds;
+        });
+        if (this.mapper.properties.player.badges.badge16 === undefined) return;
+        this.mapper.properties.player.badges.badge16.change(async(x) => {
+            console.log('badge8 change: ' + x.value);
+            if (x.value === true)
+                this.gym8Split = this.mapper.properties.gameTime.hours + ':' + this.mapper.properties.gameTime.minutes + ':' + this.mapper.properties.gameTime.seconds;
         });
     },
 }).mount('#app');

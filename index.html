@@ -19,8 +19,17 @@
         <div class="box" style="position: absolute; background: white; top: 430px; left: 10px; width:410px; height: 210px"></div>
         <img p class="sprite" style="position: absolute;top: 700px;left: 100px;" width="200" height="200"
              :src="PokemonSprites()" />
-        <div class="Badges">
-          <iframe class="Badge" style="position: absolute;top: 890px;" width="500" height="200" src="GymBadges.html" frameBorder="0"></iframe>
+        <div class="Badges" v-if="GameVersionState() === 1">
+          <iframe class="Badge" style="position: absolute;top: 890px;" width="500" height="200" src="GenOneFireRedLeafGreenBadges.html" frameBorder="0"></iframe>
+        </div>
+        <div class="Badges" v-if="GameVersionState() === 2">
+          <iframe class="Badge" style="position: absolute;top: 890px;" width="500" height="200" src="GenTwoGymBadges.html" frameBorder="0"></iframe>
+        </div>
+        <div class="Badges" v-if="GameVersionState() === 3">
+          <iframe class="Badge" style="position: absolute;top: 890px;" width="500" height="200" src="GenOneFireRedLeafGreenBadges.html" frameBorder="0"></iframe>
+        </div>
+        <div class="Badges" v-if="GameVersionState() === 4">
+          <iframe class="Badge" style="position: absolute;top: 890px;" width="500" height="200" src="GenThreeGymBadges.html" frameBorder="0"></iframe>
         </div>
         <!-- End Displays Always -->
 

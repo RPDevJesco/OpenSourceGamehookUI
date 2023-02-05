@@ -1,0 +1,83 @@
+<!doctype html>
+<html>
+
+<head>
+  <meta charset="utf-8">
+  <title>GameHook Gen 3 Badges</title>
+
+</head>
+
+<body style="overflow-x:hidden; overflow-Y:hidden;" scrolling="no" seamless="seamless">
+<div id="app">
+  <div v-if="ready == false">
+    Loading...
+  </div>
+  <div v-else>
+    <!-- Location where badge images are obtained from. https://pokemon.neoseeker.com/wiki/Gym_Badges#Boulder_Badge -->
+    <img v-show="mapper.properties.player.badges.badge1.value === true"
+         src="https://cdn.staticneo.com/w/pokemon/thumb/7/72/ZephyrBadge.png/50px-ZephyrBadge.png"/>
+    <img v-show="mapper.properties.player.badges.badge2.value === true"
+         src="https://cdn.staticneo.com/w/pokemon/thumb/c/c0/HiveBadge.png/50px-HiveBadge.png"/>
+    <img v-show="mapper.properties.player.badges.badge3.value === true"
+         src="https://cdn.staticneo.com/w/pokemon/thumb/1/1b/PlainBadge.png/50px-PlainBadge.png"/>
+    <img v-show="mapper.properties.player.badges.badge4.value === true"
+         src="https://cdn.staticneo.com/w/pokemon/thumb/b/b8/FogBadge.png/50px-FogBadge.png"/>
+    <img v-show="mapper.properties.player.badges.badge5.value === true"
+         src="https://cdn.staticneo.com/w/pokemon/thumb/c/cb/StormBadge.png/50px-StormBadge.png"/>
+    <img v-show="mapper.properties.player.badges.badge6.value === true"
+         src="https://cdn.staticneo.com/w/pokemon/thumb/e/ea/MineralBadge.png/50px-MineralBadge.png"/>
+    <img v-show="mapper.properties.player.badges.badge7.value === true"
+         src="https://cdn.staticneo.com/w/pokemon/thumb/e/e4/GlacierBadge.png/50px-GlacierBadge.png"/>
+    <img v-show="mapper.properties.player.badges.badge8.value === true"
+         src="https://cdn.staticneo.com/w/pokemon/thumb/9/91/RisingBadge.png/50px-RisingBadge.png"/>
+    <br>
+    <!-- Not quite sure if the badge values reset after beating the league or what as of now. Currently, It does show that
+    Both badge 1 and badge 9 are true after defeating just Faulkner -->
+    <img v-show="mapper.properties.player.badges.badge9.value === true && mapper.properties.overworld.mapGroup === 'Pewter City Gym'"
+         src="https://cdn.staticneo.com/w/pokemon/thumb/d/dd/Boulder_Badge.png/50px-Boulder_Badge.png"/>
+    <img v-show="mapper.properties.player.badges.badge10.value === true && mapper.properties.overworld.mapGroup === 'Cerulean City Gym'"
+         src="https://cdn.staticneo.com/w/pokemon/thumb/9/9c/Cascade_Badge.png/50px-Cascade_Badge.png"/>
+    <img v-show="mapper.properties.player.badges.badge11.value === true && mapper.properties.overworld.mapGroup === 'Vermillion City Gym'"
+         src="https://cdn.staticneo.com/w/pokemon/thumb/a/a6/Thunder_Badge.png/50px-Thunder_Badge.png"/>
+    <img v-show="mapper.properties.player.badges.badge12.value === true && mapper.properties.overworld.mapGroup === 'Celadon City Gym'"
+         src="https://cdn.staticneo.com/w/pokemon/thumb/b/b5/Rainbow_Badge.png/50px-Rainbow_Badge.png"/>
+    <img v-show="mapper.properties.player.badges.badge13.value === true && mapper.properties.overworld.mapGroup === 'Fuchsia City Gym'"
+         src="https://cdn.staticneo.com/w/pokemon/thumb/7/7d/Soul_Badge.png/50px-Soul_Badge.png"/>
+    <img v-show="mapper.properties.player.badges.badge14.value === true && mapper.properties.overworld.mapGroup === 'Saffron City Gym'"
+         src="https://cdn.staticneo.com/w/pokemon/thumb/6/6b/Marsh_Badge.png/50px-Marsh_Badge.png"/>
+    <img v-show="mapper.properties.player.badges.badge15.value === true && mapper.properties.overworld.mapGroup === 'Cinnabar City Gym'"
+         src="https://cdn.staticneo.com/w/pokemon/thumb/1/12/Volcano_Badge.png/50px-Volcano_Badge.png"/>
+    <img v-show="mapper.properties.player.badges.badge16.value === true && mapper.properties.overworld.mapGroup === 'Viridian City Gym'"
+         src="https://cdn.staticneo.com/w/pokemon/thumb/7/78/Earth_Badge.png/50px-Earth_Badge.png"/>
+  </div>
+</div>
+
+<script src="https://unpkg.com/@microsoft/signalr@latest/dist/browser/signalr.min.js"></script>
+<script src="https://unpkg.com/vue@latest/dist/vue.global.js"></script>
+<script src="http://localhost:8085/dist/gameHookMapperClient.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/chart.js@2.9.3/dist/Chart.min.js"></script>
+
+
+<script type="text/javascript">
+  const app = Vue.createApp({
+    data() {
+      return {
+        ready: false,
+        mapper: null
+      }
+    },
+    methods: {
+
+    },
+    mounted: async function () {
+      // Setup the GameHook client, and configure it to
+      // show and hide the UI based off of the ready state.
+      this.mapper = new GameHookMapperClient();
+      this.mapper.onConnected = (x) => this.ready = true;
+      this.mapper.onDisconnected = (x) => this.ready = false;
+      // Establish the connection to GameHook.
+      await this.mapper.connect();
+    },
+  }).mount('#app')
+</script>
+</body>

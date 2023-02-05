@@ -1,0 +1,67 @@
+<!doctype html>
+<html>
+
+<head>
+  <meta charset="utf-8">
+  <title>GameHook Gen 3 Badges</title>
+
+</head>
+
+<body style="overflow-x:hidden; overflow-Y:hidden;" scrolling="no" seamless="seamless">
+<div id="app">
+  <div v-if="ready == false">
+    Loading...
+  </div>
+  <div v-else>
+    <!-- Location where badge images are obtained from. https://pokemon.neoseeker.com/wiki/Gym_Badges#Boulder_Badge -->
+    <!--Byte value when you get badges-->
+    <!--Brock's byte value when you get his badge is 01 -->
+    <!--Misty's byte value when you get his badge is 03 -->
+    <img v-show="mapper.properties.player.badges.badge1.value === true"
+         src="https://cdn.staticneo.com/w/pokemon/thumb/a/a3/StoneBadge.png/50px-StoneBadge.png"/>
+    <img v-show="mapper.properties.player.badges.badge2.value === true"
+         src="https://cdn.staticneo.com/w/pokemon/thumb/e/e6/KnuckleBadge.png/50px-KnuckleBadge.png"/>
+    <img v-show="mapper.properties.player.badges.badge3.value === true"
+         src="https://cdn.staticneo.com/w/pokemon/thumb/a/ad/DynamoBadge.png/50px-DynamoBadge.png"/>
+    <img v-show="mapper.properties.player.badges.badge4.value === true"
+         src="https://cdn.staticneo.com/w/pokemon/thumb/9/92/HeatBadge.png/50px-HeatBadge.png"/>
+    <img v-show="mapper.properties.player.badges.badge5.value === true"
+         src="https://cdn.staticneo.com/w/pokemon/thumb/f/f4/BalanceBadge.png/50px-BalanceBadge.png"/>
+    <img v-show="mapper.properties.player.badges.badge6.value === true"
+         src="https://cdn.staticneo.com/w/pokemon/thumb/3/3e/FeatherBadge.png/50px-FeatherBadge.png"/>
+    <img v-show="mapper.properties.player.badges.badge7.value === true"
+         src="https://cdn.staticneo.com/w/pokemon/thumb/c/cf/MindBadge.png/50px-MindBadge.png"/>
+    <img v-show="mapper.properties.player.badges.badge8.value === true"
+         src="https://cdn.staticneo.com/w/pokemon/thumb/4/49/RainBadge.png/50px-RainBadge.png"/>
+  </div>
+</div>
+
+<script src="https://unpkg.com/@microsoft/signalr@latest/dist/browser/signalr.min.js"></script>
+<script src="https://unpkg.com/vue@latest/dist/vue.global.js"></script>
+<script src="http://localhost:8085/dist/gameHookMapperClient.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/chart.js@2.9.3/dist/Chart.min.js"></script>
+
+
+<script type="text/javascript">
+  const app = Vue.createApp({
+    data() {
+      return {
+        ready: false,
+        mapper: null
+      }
+    },
+    methods: {
+
+    },
+    mounted: async function () {
+      // Setup the GameHook client, and configure it to
+      // show and hide the UI based off of the ready state.
+      this.mapper = new GameHookMapperClient();
+      this.mapper.onConnected = (x) => this.ready = true;
+      this.mapper.onDisconnected = (x) => this.ready = false;
+      // Establish the connection to GameHook.
+      await this.mapper.connect();
+    },
+  }).mount('#app')
+</script>
+</body>
