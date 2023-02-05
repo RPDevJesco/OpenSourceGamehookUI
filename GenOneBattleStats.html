@@ -58,11 +58,11 @@
     },
     methods: {
       updateData() {
-        this.chartData.datasets[0].data = [this.mapper.properties.battle.yourPokemon.hp,
-          this.mapper.properties.battle.yourPokemon.attack,
-          this.mapper.properties.battle.yourPokemon.defense,
-          this.mapper.properties.battle.yourPokemon.speed,
-          this.mapper.properties.battle.yourPokemon.special];
+        this.chartData.datasets[0].data = [this.mapper.properties.battle.yourPokemon.battleStatHp,
+          this.mapper.properties.battle.yourPokemon.battleStatAttack,
+          this.mapper.properties.battle.yourPokemon.battleStatDefense,
+          this.mapper.properties.battle.yourPokemon.battleStatSpeed,
+          this.mapper.properties.battle.yourPokemon.battleStatSpecial];
         if (this.chart === null) return;
         this.chart.update();
       }
