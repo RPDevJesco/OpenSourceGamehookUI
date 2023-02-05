@@ -4,7 +4,10 @@
 <head>
   <meta charset="utf-8">
   <title>GameHook Gen 2 OverWorld Stat Values</title>
-
+  <!-- import a stylesheet for custom fonts here -->
+  <style>
+    @import url('https://fonts.googleapis.com/css2?family=Sassy+Frass&display=swap');
+  </style>
 </head>
 
 <body style="overflow-x:hidden; overflow-Y:hidden;" scrolling="no" seamless="seamless">
@@ -20,7 +23,7 @@
 <script src="https://unpkg.com/@microsoft/signalr@latest/dist/browser/signalr.min.js"></script>
 <script src="https://unpkg.com/vue@latest/dist/vue.global.js"></script>
 <script src="http://localhost:8085/dist/gameHookMapperClient.js"></script>
-<script src="https://cdn.jsdelivr.net/npm/chart.js@2.9.3/dist/Chart.min.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
 
 
 <script type="text/javascript">
@@ -81,26 +84,39 @@
       // Establish the connection to GameHook.
       await this.mapper.connect();
 
+      // This function will change the default font for the charts. Make sure to import the font you want to use.
+      Chart.defaults.font.family = 'Sassy Frass'
+      const backgroundColorChange = {
+        id: 'customCanvasBackgroundColor',
+        beforeDraw: (chart, args, options) => {
+          const {ctx} = chart;
+          ctx.save();
+          ctx.globalCompositeOperation = 'destination-over';
+          // Changes the background color of the chart. If you don't want this feature, remove from plugins.
+          ctx.fillStyle = options.color || '#ffffff';
+          ctx.fillRect(0, 0, chart.width, chart.height);
+          ctx.restore();
+        }
+      };
+
       this.chart = new Chart(this.$refs.barChart, {
-        type: 'radar',
+        type: 'bar',
         data: this.chartData,
         options: {
+          indexAxis: 'y',
+          elements: {
+            bar: {
+              borderWidth: 2,
+            }
+          },
           plugins: {
-            customCanvasBackgroundColor: {
-              color: 'white',
-            }
-          },
-          legend: {
-            display: false
-          },
-          tooltips: {
-            callbacks: {
-              label: function (tooltipItem) {
-                return tooltipItem.yLabel;
-              }
-            }
+            legend: {
+              display: false,
+              position: 'right',
+            },
           }
-        }
+        },
+        plugins: [backgroundColorChange],
       });
     },
   }).mount('#app')
