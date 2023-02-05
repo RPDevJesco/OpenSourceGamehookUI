@@ -42,31 +42,25 @@ const app = Vue.createApp({
          * Gen 1 is 1, gen 2 is 2, fire red / leaf green is 3 and gen 3 is 4. If it ever returns 0, that means an error has occurred.
          **/
         GameVersionState(){
-            if (this.mapper.meta.gameName === 'Pokemon Red and Blue') {
-                return 1;
+            switch (this.mapper.meta.gameName) {
+                case 'Pokemon Red and Blue':
+                    return 1;
+                case 'Pokemon Yellow':
+                    return 1;
+                case 'Pokemon Gold & Silver':
+                    return 2;
+                case 'Pokemon Crystal':
+                    return 2;
+                case 'Pokemon FireRed & LeafGreen':
+                    return 3;
+                case 'Pokemon Ruby & Sapphire':
+                    return 4;
+                case 'Pokemon Emerald':
+                    return 4;
+                default:
+                    return 0;
             }
-            else if (this.mapper.meta.gameName === 'Pokemon Yellow') {
-                return 1;
-            }
-            else if (this.mapper.meta.gameName === 'Pokemon Gold & Silver') {
-                return 2;
-            }
-            else if (this.mapper.meta.gameName === 'Pokemon Crystal') {
-                return 2;
-            }
-            else if (this.mapper.meta.gameName === 'Pokemon FireRed & LeafGreen') {
-                return 3;
-            }
-            else if (this.mapper.meta.gameName === 'Pokemon Ruby & Sapphire') {
-                return 4;
-            }
-            else if (this.mapper.meta.gameName === 'Pokemon Emerald') {
-                return 4;
-            }
-            else {
-                return 0;
-            }
-        }
+        },
     },
 
     //--------- PROGRAM MOUNTED -------------------------------------------------------------------------------//
