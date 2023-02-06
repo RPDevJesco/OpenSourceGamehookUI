@@ -23,7 +23,7 @@
 <script src="https://unpkg.com/@microsoft/signalr@latest/dist/browser/signalr.min.js"></script>
 <script src="https://unpkg.com/vue@latest/dist/vue.global.js"></script>
 <script src="http://localhost:8085/dist/gameHookMapperClient.js"></script>
-<script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/chart.js@2.9.3/dist/Chart.min.js"></script>
 
 
 <script type="text/javascript">
@@ -80,7 +80,7 @@
       await this.mapper.connect();
 
       // This function will change the default font for the charts. Make sure to import the font you want to use.
-      Chart.defaults.font.family = 'Sassy Frass'
+      Chart.defaults.global.defaultFontFamily = 'Sassy Frass';
       const backgroundColorChange = {
         id: 'customCanvasBackgroundColor',
         beforeDraw: (chart, args, options) => {
@@ -95,20 +95,18 @@
       };
 
       this.chart = new Chart(this.$refs.barChart, {
-        type: 'bar',
+        type: 'horizontalBar',
         data: this.chartData,
         options: {
-          indexAxis: 'y',
-          elements: {
-            bar: {
-              borderWidth: 2,
-            }
+          legend: {
+            display: false
           },
-          plugins: {
-            legend: {
-              display: false,
-              position: 'right',
-            },
+          tooltips: {
+            callbacks: {
+              label: function (tooltipItem) {
+                return tooltipItem.yLabel;
+              }
+            }
           }
         },
         plugins: [backgroundColorChange],

@@ -1,10 +1,6 @@
-<!doctype html>
-<html>
-
 <head>
   <meta charset="utf-8">
   <title>GameHook FireRed LeafGreen Tracking Battle Stat Values</title>
-  <!-- import a stylesheet for custom fonts here -->
   <style>
     @import url('https://fonts.googleapis.com/css2?family=Sassy+Frass&display=swap');
   </style>
@@ -19,12 +15,10 @@
     <canvas ref="barChart">{{updateData()}}</canvas>
   </div>
 </div>
-
 <script src="https://unpkg.com/@microsoft/signalr@latest/dist/browser/signalr.min.js"></script>
 <script src="https://unpkg.com/vue@latest/dist/vue.global.js"></script>
 <script src="http://localhost:8085/dist/gameHookMapperClient.js"></script>
-<script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
-
+<script src="https://cdn.jsdelivr.net/npm/chart.js@2.9.3/dist/Chart.min.js"></script>
 
 <script type="text/javascript">
   const app = Vue.createApp({
@@ -64,14 +58,15 @@
     methods: {
       updateData() {
         this.chartData.datasets[0].data = [
-            this.mapper.properties.battle.yourPokemon.hp,
-            this.mapper.properties.battle.yourPokemon.attack,
-            this.mapper.properties.battle.yourPokemon.defense,
-            this.mapper.properties.battle.yourPokemon.specialAttack,
-            this.mapper.properties.battle.yourPokemon.specialDefense,
-            this.mapper.properties.battle.yourPokemon.speed
+          this.mapper.properties.battle.yourPokemon.hp,
+          this.mapper.properties.battle.yourPokemon.attack,
+          this.mapper.properties.battle.yourPokemon.defense,
+          this.mapper.properties.battle.yourPokemon.specialAttack,
+          this.mapper.properties.battle.yourPokemon.specialDefense,
+          this.mapper.properties.battle.yourPokemon.speed
         ];
         if (this.chart === null) return;
+        this.chart.update();
       }
     },
     mounted: async function () {
@@ -84,7 +79,7 @@
       await this.mapper.connect();
 
       // This function will change the default font for the charts. Make sure to import the font you want to use.
-      Chart.defaults.font.family = 'Sassy Frass'
+      Chart.defaults.global.defaultFontFamily = 'Sassy Frass';
       const backgroundColorChange = {
         id: 'customCanvasBackgroundColor',
         beforeDraw: (chart, args, options) => {
@@ -99,25 +94,23 @@
       };
 
       this.chart = new Chart(this.$refs.barChart, {
-        type: 'bar',
+        type: 'horizontalBar',
         data: this.chartData,
         options: {
-          indexAxis: 'y',
-          elements: {
-            bar: {
-              borderWidth: 2,
-            }
+          legend: {
+            display: false
           },
-          plugins: {
-            legend: {
-              display: false,
-              position: 'right',
-            },
+          tooltips: {
+            callbacks: {
+              label: function (tooltipItem) {
+                return tooltipItem.yLabel;
+              }
+            }
           }
         },
-        plugins: [backgroundColorChange],
-      });
+          plugins: [backgroundColorChange],
+        });
     },
-  }).mount('#app')
+    }).mount('#app')
 </script>
 </body>
