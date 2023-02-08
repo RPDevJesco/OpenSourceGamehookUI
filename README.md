@@ -6,6 +6,7 @@ Used for Pokemon Generation 1 through 3. Designed to update the UI according to 
 <b>How does it work?</b>
 <br>
 Create a browser source in OBS or any streaming software you are using that supports the feature (XSplit will not natively work, will need to have the index.html open in a web browser and do window capture). Select the Local File option and the local file should be the index.html file wherever you have stored it on your system. Have RetroArch open with the pokemon game you want to play running, open Gamehook and select the appropriate mapper file. From there, the data will display as the information becomes available.
+If you are using the UI in a browser window. Make sure to have RetroArch running the rom you want to play, gamehook with the selected mapper for the game active first. Then load the index.html file. Otherwise, you will need to refresh the page to get data loaded in from gamehook.
 <br>
 <br>
 <b>Are there any issues?</b>
